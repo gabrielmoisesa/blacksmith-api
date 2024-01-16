@@ -22,12 +22,12 @@ describe('ProductsController', function () {
   describe('Create', function() {
     it('Should create and return the product with status 201', async function () {
       req.body = productMock.body;
-      sinon.stub(productService, 'create').resolves(productMock.response);
+      sinon.stub(productService, 'create').resolves(productMock.createdResponse);
 
       await productController.create(req, res, next);
 
       expect(res.status).to.have.been.calledWith(201);
-      expect(res.json).to.have.been.calledWith(productMock.response);
+      expect(res.json).to.have.been.calledWith(productMock.createdResponse.data);
     });
   })
 });

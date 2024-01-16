@@ -1,16 +1,22 @@
+import { Product } from "../../src/types/Product";
+import { ServiceResponse } from "../../src/types/ServiceResponse";
+
 const body = {
   name: 'Product 1',
   price: '10 peças de ouro',
   orderId: 1,
 };
 
-const response = {
-  id: 1,
-  name: body.name,
-  price: body.price,
+const createdResponse: ServiceResponse<Omit<Product, 'orderId'>> = {
+  status: 'CREATED',
+  data: {
+    id: 1,
+    name: body.name,
+    price: body.price,
+  }
 }
 
 export default {
   body,
-  response,
+  createdResponse,
 }

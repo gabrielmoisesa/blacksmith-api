@@ -12,9 +12,9 @@ describe('ProductsService', function () {
       const mockCreatedProduct = ProductModel.build({id: 1, ...productMock.body});
       sinon.stub(ProductModel, 'create').resolves(mockCreatedProduct);
 
-      const productReturn = await ProductService.create(productMock.body);
+      const productServiceReturn = await ProductService.create(productMock.body);
 
-      expect(productReturn).to.be.deep.equal(productMock.response)
+      expect(productServiceReturn).to.be.deep.equal(productMock.createdResponse)
     });
   })
 }); 
