@@ -1,14 +1,15 @@
 import { RequestHandler } from 'express';
 import productService from '../services/product.service';
+import httpMap from '../utils/httpMap';
 
 const getAll: RequestHandler = async (req, res) => {
-  const products = await productService.getAll();
-  res.status(200).json(products);
+  const { status, data } = await productService.getAll();
+  res.status(httpMap(status)).json(data);
 };
 
 const create: RequestHandler = async (req, res) => {
-  const created = await productService.create(req.body);
-  res.status(201).json(created);
+  const { status, data } = await productService.create(req.body);
+  res.status(httpMap(status)).json(data);
 };
 
 export default {

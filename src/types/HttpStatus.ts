@@ -1,8 +1,11 @@
-type HttpStatus = 'OK' | 'CREATED';
+type SuccessStatus = 'OK' | 'CREATED';
 
-type HttpErrorStatus = 'INVALID_DATA' | 'UNAUTHORIZED' | 'NOT_FOUND';
+type ErrorStatus = 'BAD_REQUEST' | 'NOT_FOUND';
+
+type HttpStatus = SuccessStatus | ErrorStatus;
 
 export {
+  SuccessStatus,
+  ErrorStatus,
   HttpStatus,
-  HttpErrorStatus,
 };

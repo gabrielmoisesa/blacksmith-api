@@ -1,12 +1,12 @@
-import { HttpErrorStatus, HttpStatus } from './HttpStatus';
+import { ErrorStatus, SuccessStatus } from './HttpStatus';
 
 export type ServiceResponseError = {
-  status: HttpErrorStatus,
+  status: ErrorStatus,
   data: { message: string }
 };
 
 export type ServiceResponseSuccess<T> = {
-  status: HttpStatus,
+  status: SuccessStatus,
   data: T
 };
 
