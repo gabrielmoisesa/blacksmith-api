@@ -1,12 +1,12 @@
-type ServiceResponseErrorType = 'OK' | 'CREATED';
+import { HttpErrorStatus, HttpStatus } from './HttpStatus';
 
 export type ServiceResponseError = {
-  status: ServiceResponseErrorType,
+  status: HttpErrorStatus,
   data: { message: string }
 };
 
 export type ServiceResponseSuccess<T> = {
-  status: 'SUCCESSFUL',
+  status: HttpStatus,
   data: T
 };
 

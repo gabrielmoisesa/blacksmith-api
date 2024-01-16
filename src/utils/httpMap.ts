@@ -1,5 +1,7 @@
-export default function httpMap(status: string): number {
-  const statusHTTPMap: Record<string, number> = {
+import { HttpStatus } from '../types/HttpStatus';
+
+export default function httpMap(status: HttpStatus): number {
+  const statusHTTPMap: Record<HttpStatus, number> = {
     OK: 200,
     CREATED: 201,
   };

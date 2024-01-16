@@ -1,13 +1,15 @@
-import { Model } from 'sequelize';
-import ProductModel, { ProductInputtableTypes } from '../database/models/product.model';
+import ProductModel, { ProductSequelizeModel } from '../database/models/product.model';
 import { Product } from '../types/Product';
+import { ServiceResponse } from '../types/ServiceResponse';
 
-const getAll = async (): Promise<Model<Product, ProductInputtableTypes>[]> => {
+const getAll = async (): Promise<ServiceResponse<ProductSequelizeModel[]>> => {
   const products = await ProductModel.findAll();
-  return products;
+  return { status: 'OK', data: products };
 };
 
-const create = async (product: Omit<Product, 'id'>): Promise<Omit<Product, 'orderId'>> => {
+const create = async (
+  product: Omit<Product, 'id'>,
+): Promise<ServiceResponse<Omit<Product, 'orderId'>>> => {
   const createdProduct = await ProductModel.create({
     name: product.name,
     price: product.price,
@@ -16,7 +18,7 @@ const create = async (product: Omit<Product, 'id'>): Promise<Omit<Product, 'orde
 
   const { id, name, price } = createdProduct.dataValues;
 
-  return { id, name, price };
+  return { status: 'CREATED', data: { id, name, price } };
 }; 
 
 export default {
