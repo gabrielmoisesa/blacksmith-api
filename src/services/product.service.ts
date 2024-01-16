@@ -1,5 +1,11 @@
-import ProductModel from '../database/models/product.model';
+import { Model } from 'sequelize';
+import ProductModel, { ProductInputtableTypes } from '../database/models/product.model';
 import { Product } from '../types/Product';
+
+const getAll = async (): Promise<Model<Product, ProductInputtableTypes>[]> => {
+  const products = await ProductModel.findAll();
+  return products;
+};
 
 const create = async (product: Omit<Product, 'id'>): Promise<Omit<Product, 'orderId'>> => {
   const createdProduct = await ProductModel.create({
@@ -14,5 +20,6 @@ const create = async (product: Omit<Product, 'id'>): Promise<Omit<Product, 'orde
 }; 
 
 export default {
+  getAll,
   create,
 };
