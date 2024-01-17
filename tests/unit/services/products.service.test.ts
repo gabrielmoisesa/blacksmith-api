@@ -9,12 +9,13 @@ describe('ProductsService', function () {
 
   describe('Get All', function() {
     it('Should return all products', async function () {
-      sinon.stub(ProductModel as any, 'findAll').resolves(productMock.products);
+      const mockProducts = [ProductModel.build(productMock.products)];
+      sinon.stub(ProductModel, 'findAll').resolves(mockProducts);
 
       const productServiceReturn = await productService.getAll();
 
       expect(productServiceReturn.status).to.be.equal('OK');
-      expect(productServiceReturn.data).to.be.equal(productMock.getAllResponse.data);
+      expect(productServiceReturn.data).to.be.deep.equal(mockProducts);
     });
   })
 
