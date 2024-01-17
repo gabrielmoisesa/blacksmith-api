@@ -1,11 +1,12 @@
 import bcrypt from 'bcryptjs';
-import * as jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import UserModel from '../database/models/user.model';
 import { ServiceResponse } from '../types/ServiceResponse';
 
 const secret = process.env.JWT_SECRET ?? 'secret';
 
-const login = async (username: string, password: string): Promise<ServiceResponse<string>> => {  
+const login = async (username: string, password: string): 
+Promise<ServiceResponse<{ token: string }>> => {  
   const user = await UserModel.findOne({ where: { username } });
   if (!user) return { status: 'UNAUTHORIZED', data: { message: 'Username or password invalid' } };
 
@@ -19,7 +20,7 @@ const login = async (username: string, password: string): Promise<ServiceRespons
     username: user.dataValues.username,
   }, secret, { expiresIn: '1h' });
 
-  return { status: 'OK', data: token };
+  return { status: 'OK', data: { token } };
 };
 
 export default {
