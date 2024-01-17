@@ -7,4 +7,6 @@ const validateBody: RequestHandler = (req, res, next) => {
   next();
 };
 
-export default validateBody;
+export default {
+  validateBody,
+};

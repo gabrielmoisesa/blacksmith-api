@@ -1,10 +1,10 @@
 import { RequestHandler } from 'express';
-import userService from '../services/user.service';
 import httpMap from '../utils/httpMap';
+import loginService from '../services/login.service';
 
 const login: RequestHandler = async (req, res) => {
   const { username, password } = req.body;
-  const { status, data } = await userService.login(username, password);
+  const { status, data } = await loginService.login(username, password);
   return res.status(httpMap(status)).json(data);
 };
 
