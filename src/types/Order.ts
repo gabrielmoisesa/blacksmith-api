@@ -7,5 +7,10 @@ export type Order = {
 export type OrderResponse = {
   id: number;
   userId: number;
-  productIds?: number[];
+  productIds: number[];
+};
+
+export type OrderBody = {
+  userId: number;
+  productIds: number[];
 };

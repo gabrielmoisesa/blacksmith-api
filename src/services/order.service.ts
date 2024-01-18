@@ -1,6 +1,6 @@
 import OrderModel from '../database/models/order.model';
 import ProductModel from '../database/models/product.model';
-import { Order, OrderResponse } from '../types/Order';
+import { Order, OrderBody, OrderResponse } from '../types/Order';
 import { ServiceResponse } from '../types/ServiceResponse';
 
 const getAll = async (): Promise<ServiceResponse<OrderResponse[]>> => {
@@ -24,6 +24,18 @@ const getAll = async (): Promise<ServiceResponse<OrderResponse[]>> => {
   return { status: 'OK', data: ordersFormatted };
 };
 
+const create = async (order: OrderBody): Promise<ServiceResponse<OrderBody>> => {
+  const orderCreated = await OrderModel.create({ userId: order.userId });
+
+  await ProductModel.update(
+    { orderId: orderCreated.dataValues.id },
+    { where: { id: order.productIds } },
+  );
+
+  return { status: 'OK', data: order };
+};
+
 export default {
   getAll,
+  create,
 };
