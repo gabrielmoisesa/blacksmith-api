@@ -7,6 +7,12 @@ const getAll: RequestHandler = async (req, res) => {
   res.status(httpMap(status)).json(data);
 };
 
+const create: RequestHandler = async (req, res) => {
+  const { status, data } = await orderService.create(req.body);
+  res.status(httpMap(status)).json(data);
+};
+
 export default {
   getAll,
+  create,
 };

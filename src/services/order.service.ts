@@ -32,7 +32,7 @@ const create = async (order: OrderBody): Promise<ServiceResponse<OrderBody>> => 
     { where: { id: order.productIds } },
   );
 
-  return { status: 'OK', data: order };
+  return { status: 'CREATED', data: order };
 };
 
 export default {
