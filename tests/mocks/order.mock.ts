@@ -31,7 +31,13 @@ const findAllResponse = [
   },
 ]
 
+const body = { 
+  userId: 1, productIds: [1, 2] 
+}
+
+
 export default {
   orders,
   findAllResponse,
+  body,
 }
