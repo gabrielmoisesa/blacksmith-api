@@ -6,7 +6,7 @@ const body = joi.object({
       'number.base': '"productIds" must include only numbers',
       'array.min': '"productIds" must include only numbers',
     }),
-  userId: joi.number().required(),
+  userId: joi.number().required().strict(),
 });
 
 export default {
