@@ -25,6 +25,9 @@ const getAll = async (): Promise<ServiceResponse<OrderResponse[]>> => {
 };
 
 const create = async (order: OrderBody): Promise<ServiceResponse<OrderBody>> => {
+  const user = await OrderModel.findOne({ where: { userId: order.userId } });
+  if (!user) return { status: 'NOT_FOUND', data: { message: '"userId" not found' } };
+
   const orderCreated = await OrderModel.create({ userId: order.userId });
 
   await ProductModel.update(
